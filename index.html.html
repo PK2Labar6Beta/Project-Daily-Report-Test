@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LaBar Golf – Foreman Daily Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f4f1;--card:#fff;--ink:#1c2420;--mute:#5f6b64;--line:#d9dfda;--brand:#00694a;--brand-ink:#fff;--tint:#e6f0eb;--warn:#a4400f;--warn-bg:#fbeee5;--field:#f7f9f7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111815;--card:#1a231f;--ink:#e8efea;--mute:#96a39b;--line:#2c3933;--brand:#3fb88a;--brand-ink:#07261b;--tint:#203129;--warn:#f0a070;--warn-bg:#33231a;--field:#141c18}}
+:root[data-theme="dark"]{--bg:#111815;--card:#1a231f;--ink:#e8efea;--mute:#96a39b;--line:#2c3933;--brand:#3fb88a;--brand-ink:#07261b;--tint:#203129;--warn:#f0a070;--warn-bg:#33231a;--field:#141c18}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 Barlow,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%}
+main{max-width:640px;margin:0 auto;padding:0 14px 96px}
+header.top{background:var(--brand);color:var(--brand-ink);padding:18px 14px 16px;margin:0 -14px 14px;position:relative}
+.lang{position:absolute;top:14px;right:14px;min-height:40px;padding:0 14px;border-radius:20px;border:1.5px solid var(--brand-ink);background:transparent;color:var(--brand-ink);font:600 14px Barlow,sans-serif;cursor:pointer}
+header.top h1,header.top p{padding-right:96px}
+header.top h1{font:700 28px/1.05 "Barlow Condensed",Barlow,sans-serif;margin:0}
+header.top p{margin:4px 0 0;font-size:14px;opacity:.85}
+h2{font:700 20px/1.1 "Barlow Condensed",Barlow,sans-serif;margin:22px 2px 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;display:grid;gap:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.full{grid-column:1/-1}
+label,.lab{display:block;font-size:13px;font-weight:600;color:var(--mute);margin:0 0 4px}
+input,select,textarea{width:100%;min-height:46px;padding:10px 12px;font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;appearance:none;-webkit-appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--mute) 50%),linear-gradient(135deg,var(--mute) 50%,transparent 50%);background-position:calc(100% - 18px) 20px,calc(100% - 13px) 20px;background-size:5px 5px;background-repeat:no-repeat;padding-right:32px}
+textarea{min-height:80px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+.hrs{display:flex;justify-content:space-between;align-items:center;background:var(--tint);border-radius:8px;padding:10px 12px;font-size:14px;min-height:46px}
+.hrs b{font:700 22px "Barlow Condensed",sans-serif;color:var(--brand)}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{flex:1;min-height:46px;border:0;border-right:1px solid var(--line);background:var(--field);color:var(--ink);font:600 15px Barlow,sans-serif;cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--brand);color:var(--brand-ink)}
+.seg button.on.bad{background:var(--warn);color:#fff}
+.eq-row{display:grid;grid-template-columns:1fr 84px 44px;gap:8px;margin-bottom:8px}
+.eq-row button{border:1px solid var(--line);background:var(--field);color:var(--mute);border-radius:8px;font-size:20px;cursor:pointer}
+.btn{min-height:46px;padding:0 16px;border-radius:8px;border:1px solid var(--brand);background:transparent;color:var(--brand);font:600 15px Barlow,sans-serif;cursor:pointer}
+.btn.solid{background:var(--brand);color:var(--brand-ink)}
+.btn.block{width:100%}
+.calc{border:1px solid var(--line);border-radius:8px;background:var(--field)}
+.calc summary{min-height:46px;display:flex;align-items:center;padding:0 12px;font-weight:600;color:var(--brand);cursor:pointer}
+.cbody{padding:0 12px 12px;display:grid;gap:12px}
+.rrow{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:15px}
+.rrow b{font:700 20px "Barlow Condensed",sans-serif;color:var(--brand)}
+.calc [hidden]{display:none!important}
+.check{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;font-weight:400;color:var(--ink);margin:0}
+.check input{width:26px;height:26px;min-height:0;flex:none;accent-color:var(--brand)}
+.status{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:8px;background:var(--tint);font-weight:600}
+.status.open{background:var(--warn-bg);color:var(--warn)}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;justify-content:center;align-items:center;z-index:5}
+.bar span{flex:1;max-width:300px;font-size:13px;color:var(--mute)}
+.bar .btn{flex:none}
+</style>
+</head>
+<body>
+<main>
+<header class="top"><button type="button" id="langBtn" class="lang" aria-label="Language">Español</button><h1>Foreman Daily Report</h1><p>LaBar Golf. Complete at end of shift per SOP: Foreman Field Operations, Section 4.</p></header>
+
+<h2>Job</h2>
+<div class="card grid">
+  <div><label for="project">Project / course</label><input id="project" data-p="project"></div>
+  <div><label for="job">Job #</label><input id="job" data-p="job"></div>
+  <div><label for="date">Date</label><input id="date" type="date" data-p="date"></div>
+  <div><label for="super">Superintendent</label><input id="super" data-p="super"></div>
+  <div><label for="wam">Weather – AM</label><select id="wam" data-p="wam" class="wx"></select></div>
+  <div><label for="wpm">Weather – PM</label><select id="wpm" data-p="wpm" class="wx"></select></div>
+  <div class="full"><label for="wd">Weather delay (hrs)</label><input id="wd" type="number" inputmode="decimal" min="0" step="0.25" data-p="wd"></div>
+</div>
+
+<h2>Your crew</h2>
+<div class="card grid">
+  <div class="full"><label for="leader">Crew leader</label><input id="leader" data-p="leader" autocomplete="name"></div>
+  <div class="full"><label for="level">Level</label><select id="level" data-p="level"><option>Foreman A</option><option>Foreman B</option><option>Project Associate</option></select></div>
+  <div><label for="start">Start time</label><input id="start" type="time" data-p="start"></div>
+  <div><label for="end">End time</label><input id="end" type="time" data-p="end"></div>
+  <div><label for="size">Crew size</label><input id="size" type="number" inputmode="numeric" min="0" data-p="size"></div>
+  <div><label>Crew hours</label><div class="hrs"><span><span id="h1">0.00</span> hrs each</span><b id="h2">0.00</b></div></div>
+</div>
+
+<h2>Work completed</h2>
+<div class="card">
+  <div><label for="act">Activity description</label><textarea id="act" data-p="act"></textarea></div>
+  <div><label for="loc">Location / hole #s</label><input id="loc" data-p="loc"></div>
+  <div><label for="prod">Production / qty completed</label><textarea id="prod" data-p="prod"></textarea></div>
+  <details class="calc" id="calc"><summary>Calculator</summary><div class="cbody">
+<div class="seg"><button type="button" data-tab="1" class="on">Length</button><button type="button" data-tab="2">Volume</button><button type="button" data-tab="3">Fill / trench</button></div>
+<div id="p1" class="grid"><div><label for="c1v">Value</label><input id="c1v" type="number" inputmode="decimal" min="0" step="any"></div><div><label for="c1u">Unit</label><select id="c1u"><option value="1">ft</option><option value="0.0833333333">in</option><option value="3">yd</option><option value="3.28084">m</option></select></div>
+<div class="full"><div class="rrow"><span>Linear feet (LF)</span><b id="r1a">0</b></div><div class="rrow"><span>Inches</span><b id="r1b">0</b></div><div class="rrow"><span>Yards</span><b id="r1c">0</b></div><div class="rrow"><span>Meters</span><b id="r1d">0</b></div></div>
+<button type="button" class="btn full" data-add="lf" data-en="Add LF to production">Add LF to production</button></div>
+<div id="p2" class="grid" hidden><div><label for="c2v">Value</label><input id="c2v" type="number" inputmode="decimal" min="0" step="any"></div><div><label for="c2u">Unit</label><select id="c2u"><option value="1">cu ft</option><option value="27">cu yd</option><option value="0.000578703704">cu in</option><option value="35.3147">m³</option></select></div>
+<div class="full"><div class="rrow"><span>Cubic feet</span><b id="r2a">0</b></div><div class="rrow"><span>Cubic yards</span><b id="r2b">0</b></div><div class="rrow"><span>Cubic meters</span><b id="r2c">0</b></div></div>
+<button type="button" class="btn full" data-add="cy2" data-en="Add cu yd to production">Add cu yd to production</button></div>
+<div id="p3" class="grid" hidden><div class="full"><label for="c3l">Length (ft)</label><input id="c3l" type="number" inputmode="decimal" min="0" step="any"></div><div><label for="c3w">Width (ft)</label><input id="c3w" type="number" inputmode="decimal" min="0" step="any"></div><div><label for="c3d">Depth (in)</label><input id="c3d" type="number" inputmode="decimal" min="0" step="any"></div>
+<div class="full"><div class="rrow"><span>Cubic feet</span><b id="r3a">0</b></div><div class="rrow"><span>Cubic yards</span><b id="r3b">0</b></div></div>
+<button type="button" class="btn full" data-add="cy3" data-en="Add cu yd to production">Add cu yd to production</button></div>
+<div><label for="clabel">Label (optional)</label><input id="clabel"></div>
+</div></details>
+<div><label for="mat">Materials used</label><input id="mat" data-p="mat"></div>
+  <div><div class="lab">Equipment used</div><div id="eq"></div><button type="button" class="btn" id="addEq">Add equipment</button></div>
+</div>
+
+<h2>Inspections</h2>
+<div class="card">
+  <div><div class="lab">Tenna inspection complete</div><div class="seg" data-seg="tenna"><button data-v="Yes">Yes</button><button data-v="No">No</button><button data-v="N/A">N/A</button></div></div>
+  <div><div class="lab">End-of-day inspection complete</div><div class="seg" data-seg="eod"><button data-v="Yes">Yes</button><button data-v="No" class="bad">No</button></div></div>
+</div>
+
+<h2>Issues and delays</h2>
+<div class="card"><textarea id="iss" data-p="iss" aria-label="Issues and delays"></textarea></div>
+
+<h2>Safety</h2>
+<div class="card">
+  <div class="grid">
+    <div class="full"><div class="lab">Toolbox talk held</div><div class="seg" data-seg="tbHeld"><button data-v="Yes">Yes</button><button data-v="No">No</button><button data-v="N/A">N/A</button></div></div>
+    <div class="full"><label for="tbTopic">Toolbox topic</label><input id="tbTopic" data-p="tbTopic"></div>
+    <div><label for="inc">Incidents</label><input id="inc" type="number" inputmode="numeric" min="0" data-p="inc"></div>
+    <div><label for="nm">Near misses</label><input id="nm" type="number" inputmode="numeric" min="0" data-p="nm"></div>
+    <div><label for="sc">Safe catches</label><input id="sc" type="number" inputmode="numeric" min="0" data-p="sc"></div>
+    <div><label for="sw">Stop-work events</label><input id="sw" type="number" inputmode="numeric" min="0" data-p="sw"></div>
+  </div>
+  <div><div class="lab">Safety report submitted</div><div class="seg" data-seg="rep"><button data-v="Yes">Yes</button><button data-v="No">No</button><button data-v="N/A">N/A</button></div></div>
+  <div><label for="sd">Safety details</label><textarea id="sd" data-p="sd"></textarea></div>
+</div>
+
+<h2>Notes</h2>
+<div class="card"><textarea id="notes" data-p="notes" aria-label="Notes"></textarea></div>
+
+<h2>End-of-day close-out (SOP 4.3)</h2>
+<div class="card" id="closeout"></div>
+
+<h2>Next-day plan</h2>
+<div class="card"><textarea id="next" data-p="next" aria-label="Next-day plan" style="min-height:110px"></textarea></div>
+
+<h2>Sign-off</h2>
+<div class="card grid">
+  <div><label for="signF">Your name</label><input id="signF" data-p="signF"></div>
+  <div><label for="dateF">Date</label><input id="dateF" type="date" data-p="dateF"></div>
+</div>
+<button class="btn block" id="reset">Clear form</button>
+</main>
+<div class="bar"><span id="saved">Changes save on this device.</span><button class="btn solid" id="copy">Copy report</button></div>
+
+<script>
+var KEY="labar-foreman-report-v2";
+var CLOSE=["Completed work inspected; deficiencies corrected or logged","Equipment fueled, cleaned, parked; damage reported in Tenna","Timecards reviewed and submitted on schedule","Attendance tracked; workforce needs sent to Superintendent","Next-day plan reviewed with Superintendent"];
+var WX=["Clear","Partly cloudy","Cloudy","Light Rain","Rain","Heavy Rain","Snow","Windy","Hot","Cold"];
+function today(){var d=new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
+function fresh(){return{started:today(),project:D.project||"",job:D.job||"",date:today(),super:D.super||"",wam:"Clear",wpm:"Clear",wd:"0",leader:"",level:"Foreman A",start:"",end:"",size:"",act:"",loc:"",prod:"",mat:"",eq:[{n:"",q:""}],tenna:"",eod:"",iss:"",tbHeld:"",tbTopic:"",inc:0,nm:0,sc:0,sw:0,rep:"",sd:"",notes:"",close:[false,false,false,false,false],next:"",signF:"",dateF:""}}
+var S;
+try{var raw=localStorage.getItem(KEY);S=raw?JSON.parse(raw):null}catch(e){S=null}
+var D={};try{D=JSON.parse(localStorage.getItem(KEY+"-defaults")||"{}")}catch(e){D={}}
+if(S&&S.eq){["project","job","super"].forEach(function(k){if(S[k]&&!D[k])D[k]=S[k]})}
+if(!S||!S.eq||S.started!==today())S=fresh();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));document.getElementById("saved").textContent="Saved on this device."}catch(e){document.getElementById("saved").textContent="Not saved (storage unavailable)."}}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
+function hours(){if(!S.start||!S.end)return 0;var a=S.start.split(":"),b=S.end.split(":");var m=(+b[0]*60+ +b[1])-(+a[0]*60+ +a[1]);if(m<0)m+=1440;return m/60}
+function calc(){var h=hours();document.getElementById("h1").textContent=h.toFixed(2);document.getElementById("h2").textContent=(h*(+S.size||0)).toFixed(2)}
+function getp(p){var o=S,k=p.split(".");for(var i=0;i<k.length-1;i++)o=o[k[i]];return[o,k[k.length-1]]}
+function renderEq(){document.getElementById("eq").innerHTML=S.eq.map(function(e,j){return'<div class="eq-row"><input placeholder="Equipment" aria-label="Equipment" data-p="eq.'+j+'.n" value="'+esc(e.n)+'"><input type="number" inputmode="numeric" placeholder="Qty" aria-label="Quantity" data-p="eq.'+j+'.q" value="'+esc(e.q)+'"><button type="button" data-rm="'+j+'" aria-label="Remove equipment">×</button></div>'}).join("")}
+function renderClose(){var all=S.close.every(Boolean);document.getElementById("closeout").innerHTML=CLOSE.map(function(c,i){return'<label class="check"><input type="checkbox" data-ck="'+i+'"'+(S.close[i]?" checked":"")+'><span>'+c+'</span></label>'}).join("")+'<div class="status'+(all?"":" open")+'"><span>Close-out status</span><span>'+(all?"Complete":"Open")+'</span></div>'}
+function segs(){document.querySelectorAll("[data-seg]").forEach(function(s){var v=S[s.dataset.seg];s.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)})})}
+document.querySelectorAll(".wx").forEach(function(s){s.innerHTML=WX.map(function(w){return"<option>"+w+"</option>"}).join("")});
+document.querySelectorAll("[data-p]").forEach(function(el){if(el.closest("#eq"))return;var r=getp(el.dataset.p);el.value=r[0][r[1]]==null?"":r[0][r[1]]});
+document.addEventListener("input",function(e){var el=e.target;if(!el.dataset||!el.dataset.p)return;var r=getp(el.dataset.p);r[0][r[1]]=el.value;
+if(/^(project|job|super)$/.test(el.dataset.p)){D[el.dataset.p]=el.value;try{localStorage.setItem(KEY+"-defaults",JSON.stringify(D))}catch(x){}}
+calc();save()});
+document.addEventListener("change",function(e){var el=e.target;if(el.dataset&&el.dataset.p){var q=getp(el.dataset.p);q[0][q[1]]=el.value;calc();save()}if(el.dataset&&el.dataset.ck!==undefined){S.close[el.dataset.ck]=el.checked;renderClose();save()}});
+document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+var sg=b.closest("[data-seg]");if(sg){var k=sg.dataset.seg;S[k]=S[k]===b.dataset.v?"":b.dataset.v;segs();save();return}
+if(b.dataset.rm!==undefined){S.eq.splice(b.dataset.rm,1);if(!S.eq.length)S.eq.push({n:"",q:""});renderEq();save()}});
+document.getElementById("addEq").onclick=function(){S.eq.push({n:"",q:""});renderEq();save()};
+document.getElementById("reset").onclick=function(){if(confirm(T("Clear everything and start a new report?"))){S=fresh();save();location.reload()}};
+document.getElementById("copy").onclick=function(){var h=hours(),eq=S.eq.filter(function(e){return e.n}).map(function(e){return e.n+" x"+(e.q||1)}).join(", ");
+var t=["LaBar Golf – Foreman Daily Report","Date: "+S.date+" | Job "+S.job+" | "+S.project,"Weather: "+S.wam+" / "+S.wpm+" | Delay "+S.wd+" hrs","Crew: "+S.leader+" ("+S.level+") "+S.start+"–"+S.end+", "+(S.size||0)+" ppl, "+(h*(+S.size||0)).toFixed(2)+" crew hrs","Work: "+S.act,"Location: "+S.loc,"Production: "+S.prod,"Materials: "+S.mat,"Equipment: "+eq,"Tenna: "+S.tenna+" | End-of-day inspection: "+S.eod,"Issues: "+S.iss,"Safety: incidents "+S.inc+", near misses "+S.nm+", safe catches "+S.sc+", stop-work "+S.sw+", report submitted "+S.rep,"Notes: "+S.notes,"Close-out: "+(S.close.every(Boolean)?"Complete":"Open"),"Next day: "+S.next].join("\n"),btn=this;
+function done(m){btn.textContent=m;setTimeout(function(){btn.textContent="Copy report"},1800)}
+try{navigator.clipboard.writeText(t).then(function(){done("Copied")},function(){done("Copy blocked")})}catch(x){done("Copy blocked")}};
+renderEq();renderClose();segs();calc();
+
+var ES={"Foreman Daily Report":"Informe diario del capataz","LaBar Golf. Complete at end of shift per SOP: Foreman Field Operations, Section 4.":"LaBar Golf. Complete al final del turno según el SOP: Operaciones de campo del capataz, Sección 4.","Job":"Trabajo","Project / course":"Proyecto / campo","Job #":"N.º de trabajo","Date":"Fecha","Superintendent":"Superintendente","Weather – AM":"Clima – AM","Weather – PM":"Clima – PM","Weather delay (hrs)":"Retraso por clima (hrs)","Your crew":"Su cuadrilla","Crew leader":"Jefe de cuadrilla","Level":"Nivel","Foreman A":"Capataz A","Foreman B":"Capataz B","Project Associate":"Asociado de proyecto","Start time":"Hora de inicio","End time":"Hora de fin","Crew size":"Tamaño de la cuadrilla","Crew hours":"Horas de cuadrilla","hrs each":"hrs c/u","Work completed":"Trabajo realizado","Activity description":"Descripción de la actividad","Location / hole #s":"Ubicación / n.º de hoyos","Production / qty completed":"Producción / cantidad completada","Materials used":"Materiales usados","Equipment used":"Equipo usado","Add equipment":"Agregar equipo","Equipment":"Equipo","Qty":"Cant.","Quantity":"Cantidad","Remove equipment":"Quitar equipo","Inspections":"Inspecciones","Tenna inspection complete":"Inspección Tenna completa","End-of-day inspection complete":"Inspección de fin de día completa","Yes":"Sí","Issues and delays":"Problemas y retrasos","Safety":"Seguridad","Toolbox talk held":"Charla de seguridad realizada","Toolbox topic":"Tema de la charla","Incidents":"Incidentes","Near misses":"Casi accidentes","Safe catches":"Detecciones seguras","Stop-work events":"Paros de trabajo","Safety report submitted":"Informe de seguridad enviado","Safety details":"Detalles de seguridad","Notes":"Notas","End-of-day close-out (SOP 4.3)":"Cierre del día (SOP 4.3)","Completed work inspected; deficiencies corrected or logged":"Trabajo terminado inspeccionado; deficiencias corregidas o registradas","Equipment fueled, cleaned, parked; damage reported in Tenna":"Equipo con combustible, limpio y estacionado; daños reportados en Tenna","Timecards reviewed and submitted on schedule":"Tarjetas de tiempo revisadas y enviadas a tiempo","Attendance tracked; workforce needs sent to Superintendent":"Asistencia registrada; necesidades de personal enviadas al Superintendente","Next-day plan reviewed with Superintendent":"Plan del día siguiente revisado con el Superintendente","Close-out status":"Estado del cierre","Complete":"Completo","Open":"Abierto","Next-day plan":"Plan del día siguiente","Sign-off":"Firma","Your name":"Su nombre","Clear form":"Borrar formulario","Copy report":"Copiar informe","Copied":"Copiado","Copy blocked":"Copia bloqueada","Changes save on this device.":"Los cambios se guardan en este dispositivo.","Saved on this device.":"Guardado en este dispositivo.","Not saved (storage unavailable).":"No se guardó (almacenamiento no disponible).","Clear everything and start a new report?":"¿Borrar todo y comenzar un informe nuevo?","Language":"Idioma","Clear":"Despejado","Partly cloudy":"Parcialmente nublado","Cloudy":"Nublado","Light Rain":"Lluvia ligera","Rain":"Lluvia","Heavy Rain":"Lluvia fuerte","Snow":"Nieve","Windy":"Ventoso","Hot":"Calor","Cold":"Frío"};
+Object.assign(ES,{"Calculator":"Calculadora","Length":"Longitud","Volume":"Volumen","Fill / trench":"Relleno / zanja","Value":"Valor","Unit":"Unidad","Length (ft)":"Longitud (pies)","Width (ft)":"Ancho (pies)","Depth (in)":"Profundidad (pulg)","Label (optional)":"Etiqueta (opcional)","Linear feet (LF)":"Pies lineales (LF)","Inches":"Pulgadas","Yards":"Yardas","Meters":"Metros","Cubic feet":"Pies cúbicos","Cubic yards":"Yardas cúbicas","Cubic meters":"Metros cúbicos","Add LF to production":"Agregar LF a producción","Add cu yd to production":"Agregar yd³ a producción","Added":"Agregado"});
+(function(){
+function $(i){return document.getElementById(i)}
+function rd(n){return isFinite(n)?Math.round(n*100)/100:0}
+function f(n){return rd(n).toLocaleString("en-US",{maximumFractionDigits:2})}
+var vals={};
+function upd(){
+var ft=(parseFloat($("c1v").value)||0)*parseFloat($("c1u").value);
+$("r1a").textContent=f(ft);$("r1b").textContent=f(ft*12);$("r1c").textContent=f(ft/3);$("r1d").textContent=f(ft/3.28084);
+var cf=(parseFloat($("c2v").value)||0)*parseFloat($("c2u").value);
+$("r2a").textContent=f(cf);$("r2b").textContent=f(cf/27);$("r2c").textContent=f(cf/35.3147);
+var c3=(parseFloat($("c3l").value)||0)*(parseFloat($("c3w").value)||0)*(parseFloat($("c3d").value)||0)/12;
+$("r3a").textContent=f(c3);$("r3b").textContent=f(c3/27);
+vals={lf:rd(ft),cy2:rd(cf/27),cy3:rd(c3/27)}}
+$("calc").addEventListener("input",upd);$("calc").addEventListener("change",upd);
+$("calc").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+if(b.dataset.tab){[1,2,3].forEach(function(i){$("p"+i).hidden=String(i)!==b.dataset.tab});document.querySelectorAll("#calc [data-tab]").forEach(function(x){x.classList.toggle("on",x===b)});return}
+if(b.dataset.add){upd();var k=b.dataset.add,val=vals[k];if(!val)return;var lab=$("clabel").value.trim();var txt=f(val)+(k==="lf"?" LF":" cu yd")+(lab?" "+lab:"");var ta=$("prod"),cur=ta.value.trim();ta.value=cur?cur.replace(/;\s*$/,"")+"; "+txt:txt;S.prod=ta.value;save();b.textContent="Added";setTimeout(function(){b.textContent=b.dataset.en},1200)}});
+})();
+var LANG="en";
+try{LANG=localStorage.getItem("labar-lang")||((navigator.language||"").slice(0,2)==="es"?"es":"en")}catch(e){}
+function T(s){return LANG==="es"&&ES[s]?ES[s]:s}
+document.querySelectorAll("option").forEach(function(o){o.setAttribute("value",o.value)});
+function applyLang(){
+var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),n,list=[];while(n=w.nextNode())list.push(n);
+list.forEach(function(n){var p=n.parentNode;if(!p||p.tagName==="SCRIPT"||p.tagName==="STYLE"||p.id==="langBtn")return;
+if(n.__en===undefined){var m=n.nodeValue.match(/^(\s*)([\s\S]*?)(\s*)$/);if(!m[2])return;n.__en=m[2];n.__l=m[1];n.__t=m[3]}
+var nv=n.__l+T(n.__en)+n.__t;if(n.nodeValue!==nv)n.nodeValue=nv});
+document.querySelectorAll("[placeholder],[aria-label]").forEach(function(el){["placeholder","aria-label"].forEach(function(a){if(!el.hasAttribute(a))return;var k="__"+a;if(el[k]===undefined)el[k]=el.getAttribute(a);var v=T(el[k]);if(el.getAttribute(a)!==v)el.setAttribute(a,v)})});
+document.documentElement.lang=LANG;var lb=document.getElementById("langBtn"),lt=LANG==="es"?"English":"Español";if(lb.textContent!==lt)lb.textContent=lt}
+document.getElementById("langBtn").onclick=function(){LANG=LANG==="es"?"en":"es";try{localStorage.setItem("labar-lang",LANG)}catch(e){}applyLang()};
+new MutationObserver(function(){applyLang()}).observe(document.body,{childList:true,subtree:true});
+applyLang();
+</script>
+</body>
+</html>
